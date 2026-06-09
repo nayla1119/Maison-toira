@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bracelet - Maison Étoira</title>
+  <style>
+    body {
+      font-family: Poppins, sans-serif;
+      background: #fdf8f5;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .product {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: white;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .product img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .product-info {
+      flex: 1;
+    }
+
+    .product-info h3 {
+      margin: 0;
+    }
+
+    .product-info p {
+      margin: 8px 0;
+      color: #666;
+    }
+
+    .qty-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .qty-box button {
+      width: 35px;
+      height: 35px;
+      border: none;
+      border-radius: 8px;
+      font-size: 20px;
+      cursor: pointer;
+      background: #d9b99b;
+      color: white;
+    }
+
+    .qty {
+      width: 40px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .checkout {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: #25D366;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<a href="index.html" class="back">← Kembali</a>
+
+<h1>Bracelet Collection ✨</h1>
+
+<!-- Product 1 -->
+<div class="product">
+  <img src="logo.png" alt="Italian Bracelet">
+
+  <div class="product-info">
+    <h3>Italian Bracelet</h3>
+    <p>Rp25.000</p>
+
+    <div class="qty-box">
+      <button onclick="changeQty(0, -1)">-</button>
+      <div class="qty" id="qty0">0</div>
+      <button onclick="changeQty(0, 1)">+</button>
+    </div>
+  </div>
+</div>
+
+<!-- Product 2 -->
+<div class="product">
+  <img src="logo.png" alt="Charm Bracelet">
+
+  <div class="product-info">
+    <h3>Charm Bracelet</h3>
+    <p>Rp30.000</p>
+
+    <div class="qty-box">
+      <button onclick="changeQty(1, -1)">-</button>
+      <div class="qty" id="qty1">0</div>
+      <button onclick="changeQty(1, 1)">+</button>
+    </div>
+  </div>
+</div>
+
+<!-- Product 3 -->
+<div class="product">
+  <img src="logo.png" alt="Beads Bracelet">
+
+  <div class="product-info">
+    <h3>Beads Bracelet</h3>
+    <p>Rp20.000</p>
+
+    <div class="qty-box">
+      <button onclick="changeQty(2, -1)">-</button>
+      <div class="qty" id="qty2">0</div>
+      <button onclick="changeQty(2, 1)">+</button>
+    </div>
+  </div>
+</div>
+
+<button class="checkout" onclick="addToCart()">Tambah ke Keranjang 🛒</button>
+
+<script>
+  let products = [
+    { name: "Italian Bracelet", price: 25000, qty: 0 },
+    { name: "Charm Bracelet", price: 30000, qty: 0 },
+    { name: "Beads Bracelet", price: 20000, qty: 0 }
+  ];
+
+  function changeQty(index, change) {
+    products[index].qty += change;
+
+    if (products[index].qty < 0) {
+      products[index].qty = 0;
+    }
+
+    if (products[index].qty > 999) {
+      products[index].qty = 999;
+    }
+
+    document.getElementById("qty" + index).innerText = products[index].qty;
+  }
+
+  function addToCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let hasOrder = false;
+
+    products.forEach(product => {
+        if (product.qty > 0) {
+            hasOrder = true;
+            let existingProduct = cart.find(item => item.name === product.name);
+            if (existingProduct) {
+                existingProduct.quantity += product.qty;
+            } else {
+                cart.push({
+                    name: product.name,
+                    price: product.price,
+                    quantity: product.qty,
+                    image: "logo.png"
+                });
+            }
+            // reset qty setelah masuk cart
+            product.qty = 0;
+        }
+    });
+    if (!hasOrder) {
+        alert("Pilih produk dulu ya 😭");
+        return;
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    // update tampilan qty jadi 0 lagi
+    products.forEach((product, index) => {
+        document.getElementById("qty" + index).innerText = product.qty;
+    });
+    alert("Produk berhasil masuk keranjang 🛒💗");
+}
+</script>
+
+</body>
+</html>
