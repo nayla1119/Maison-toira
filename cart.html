@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang - Maison Étoira</title>
+
+    <style>
+    :root {
+        --bg: #fdf8f5;
+        --card: white;
+        --text: #5c4033;
+        --subtext: #666;
+        --button: #d9b99b;
+        --danger: #ff6b6b;
+        --shadow: rgba(0,0,0,0.08);
+    }
+
+    body.dark {
+        --bg: #1a1a1a;
+        --card: #2a2a2a;
+        --text: #f5e6d3;
+        --subtext: #ccc;
+        --button: #8b6f57;
+        --danger: #cc5555;
+        --shadow: rgba(255,255,255,0.05);
+    }
+
+    body {
+        font-family: Poppins, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        margin: 0;
+        padding: 20px;
+        transition: 0.3s;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        text-decoration: none;
+        background: var(--button);
+        color: white;
+        padding: 10px 18px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+
+    .cart-container {
+        max-width: 700px;
+        margin: auto;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background: var(--card);
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px var(--shadow);
+    }
+
+    .cart-item img {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+
+    .cart-item h3 {
+        margin: 0;
+        color: var(--text);
+    }
+
+    .cart-item p {
+        margin: 5px 0;
+        color: var(--subtext);
+    }
+
+    .cart-item button {
+        background: var(--danger);
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .empty-cart {
+        text-align: center;
+        background: var(--card);
+        padding: 30px;
+        border-radius: 15px;
+        color: var(--subtext);
+        box-shadow: 0 4px 10px var(--shadow);
+    }
+
+    #cart-total {
+        text-align: right;
+        color: var(--text);
+        margin-top: 20px;
+    }
+
+    .checkout-btn {
+        width: 100%;
+        padding: 15px;
+        background: #25D366;
+        color: white;
+        font-size: 18px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+    <header>
+        <h1>🛒 Keranjang Belanja</h1>
+        <a href="index.html" class="btn">← Kembali Belanja</a>
+    </header>
+
+    <main class="cart-container">
+        <div id="cart-items"></div>
+
+        <h2 id="cart-total">Total: Rp0</h2>
+
+        <button onclick="checkoutWhatsApp()" class="checkout-btn">
+            Order via WhatsApp
+        </button>
+    </main>
+
+    <script>
+        function displayCart() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let cartItems = document.getElementById("cart-items");
+            let total = 0;
+
+            cartItems.innerHTML = "";
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <h3>Keranjang masih kosong 🥹</h3>
+                        <p>Yuk pilih produk dulu 💗</p>
+                    </div>
+                `;
+                document.getElementById("cart-total").innerText = "Total: Rp0";
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div style="flex:1;">
+                            <h3>${item.name}</h3>
+                            <p>Rp${item.price.toLocaleString()} x ${item.quantity}</p>
+                            <button onclick="removeItem(${index})">Hapus</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById("cart-total").innerText =
+                "Total: Rp" + total.toLocaleString();
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            displayCart();
+        }
+
+        function checkoutWhatsApp() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            if (cart.length === 0) {
+                alert("Keranjang kosong!");
+                return;
+            }
+
+            let message = "Halo admin Maison Étoira, saya mau order:%0A%0A";
+            let total = 0;
+
+            cart.forEach(item => {
+                let subtotal = item.price * item.quantity;
+                total += subtotal;
+
+                message += `${item.name} x${item.quantity} = Rp${subtotal}%0A`;
+            });
+
+            message += `%0ATotal: Rp${total}%0A%0AMohon dicek ya`;
+
+            let phoneNumber = "62895327348234";
+            let url = `https://wa.me/${phoneNumber}?text=${message}`;
+
+            window.open(url, "_blank");
+        }
+        
+        function loadTheme() {
+            let savedTheme = localStorage.getItem("theme");
+            if (savedTheme === "dark") {
+                document.body.classList.add("dark");
+            } else {
+                document.body.classList.remove("dark-mode");
+            }
+        }
+        loadTheme();
+        displayCart();
+    </script>
+
+</body>
+</html>

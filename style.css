@@ -406,7 +406,9 @@ footer p{
     font-size:50px;
   }
 
-  /* FLOATING STARS */
+}
+
+/* FLOATING STARS */
 .stars{
   position:fixed;
   inset:0;
@@ -423,8 +425,7 @@ footer p{
   position:absolute;
   width:200%;
   height:200%;
-  background-image:
-    radial-gradient(white 1px, transparent 1px);
+  background-image: radial-gradient(white 1px, transparent 1px);
   background-size:50px 50px;
   opacity:0.15;
   animation:moveStars 120s linear infinite;
@@ -445,7 +446,6 @@ footer p{
 }
 
 /* LOADER */
-
 #loader{
   position:fixed;
   inset:0;
@@ -456,7 +456,8 @@ footer p{
   align-items:center;
   gap:20px;
   z-index:9999;
-  transition:1s;
+  /*transition:1s;*/
+  transition:opacity 1s ease, visibility 1s ease;
 }
 
 #loader img{
@@ -482,11 +483,11 @@ footer p{
   }
 }
 
+/* FAQ */
 .faq-question{
   display:flex;
   justify-content:space-between;
   align-items:center;
-
   cursor:pointer;
 }
 
@@ -502,4 +503,100 @@ footer p{
   max-height:200px;
   margin-top:20px;
 }
+
+/* CART PAGE */
+.cart-container{
+  max-width:800px;
+  margin:40px auto;
+  padding:20px;
+}
+
+.cart-item{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  background:white;
+  padding:20px;
+  margin-bottom:20px;
+  border-radius:15px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+body.dark .cart-item{
+  background:#0d1830;
+}
+
+.cart-item img{
+  width:100px;
+  height:100px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.cart-item h3{
+  margin-bottom:8px;
+}
+
+.cart-item button{
+  background:#d9534f;
+  color:white;
+  border:none;
+  padding:10px 15px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.cart-item button:hover{
+  background:#c9302c;
+}
+
+/* tombol kembali belanja */
+.back-btn{
+  display:inline-block;
+  padding:12px 20px;
+  background:#2563eb;
+  color:white;
+  text-decoration:none;
+  border-radius:12px;
+  transition:0.3s;
+}
+
+.back-btn:hover{
+  opacity:0.9;
+}
+
+body.dark .back-btn{
+  background:#1e3a8a;
+  color:white;
+}
+
+/* tombol checkout / WA */
+.checkout-btn{
+  width:100%;
+  padding:15px;
+  background:#2563eb;
+  color:white;
+  border:none;
+  border-radius:12px;
+  font-size:18px;
+  cursor:pointer;
+  margin-top:20px;
+  transition:0.3s;
+}
+
+.checkout-btn:hover{
+  opacity:0.9;
+}
+
+body.dark .checkout-btn{
+  background:#1e40af;
+  color:white;
+}
+
+/* responsive cart */
+@media(max-width:768px){
+  .cart-item{
+    flex-direction:column;
+    text-align:center;
+  }
 }
