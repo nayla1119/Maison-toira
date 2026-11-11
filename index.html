@@ -23,13 +23,24 @@
     <p>Accessories & Cute Stuff</p>
   </div>
 
-  <ul>
+  <ul class="nav-menu">
     <li><a href="#home">Beranda</a></li>
     <li><a href="#produk">Produk</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
 
-  <div class="toggle" onclick="toggleTheme()"></div>
+  <div class="nav-actions">
+    <div class="toggle"
+         onclick="toggleTheme()"
+         title="Ganti tema">
+    </div>
+
+    <button class="menu-button"
+            onclick="toggleMenu()"
+            aria-label="Buka menu">
+      ☰
+    </button>
+  </div>
 </nav>
 
 <!-- Hero -->
@@ -43,9 +54,15 @@
     </p>
 
     <div class="buttons">
-      <a href="#produk"><button class="btn primary">Shop Now</button></a>
-      <a href="https://wa.me/message/4MRMQU22PR3TA1" target="_blank">
-        <button class="btn secondary">Contact Us</button>
+      <a href="#produk" class="btn primary">
+        Shop Now
+      </a>
+
+      <a href="https://wa.me/message/4MRMQU22PR3TA1"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn secondary">
+        Contact Us
       </a>
     </div>
   </div>
@@ -90,6 +107,7 @@
 
 <!-- FAQ -->
 <section class="faq" id="faq">
+
   <div class="title">
     <h2>FAQ</h2>
   </div>
@@ -99,8 +117,10 @@
       <h3>Bagaimana cara order?</h3>
       <span>+</span>
     </div>
+
     <div class="faq-answer">
-      Pilih kategori, pilih produk, atur jumlah pesanan, lalu checkout via WhatsApp.
+      Pilih kategori, pilih produk, atur jumlah pesanan,
+      lalu checkout via WhatsApp.
     </div>
   </div>
 
@@ -109,13 +129,12 @@
       <h3>Apakah bisa request model?</h3>
       <span>+</span>
     </div>
+
     <div class="faq-answer">
       Bisa, langsung chat admin lewat WhatsApp ya ✨
     </div>
-    <div class="cart-button-container">
-      <a href="cart.html" class="cart-btn">🛒 Lihat Keranjang</a>
-    </div>
   </div>
+
 </section>
 
 <!-- Footer -->
@@ -124,12 +143,19 @@
   <p>Accessories & Cute Stuff ✨</p>
   <div class="ig">
     <p>
-      <a href="https://www.instagram.com/maisonetoira?igsh=MWc5bmFlcWE3bjVnZw==" target="_blank">
+      <a href="https://www.instagram.com/maisonetoira/"
+        target="_blank"
+        rel="noopener noreferrer">
         Instagram: @maisonetoira
       </a>
     </p>
   </div>
 </footer>
+
+<a href="cart.html" class="floating-cart">
+    <span class="cart-icon">🛒</span>
+    <span id="cart-count">0</span>
+</a>
 
 <script src="script.js"></script>
 

@@ -9,27 +9,44 @@ function toggleTheme() {
 
 window.addEventListener("load", () => {
     let savedTheme = localStorage.getItem("theme");
-
     if (savedTheme === "dark") {
         document.body.classList.add("dark");
     }
 });
 
-window.addEventListener("load", function () {
+// =========================
+// LOADER
+// =========================
+window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
-
+  // Periksa apakah loader tersedia
+  if (!loader) return;
   setTimeout(() => {
     loader.style.opacity = "0";
     loader.style.visibility = "hidden";
-  }, 2000);
+  }, 1000);
 });
 
-const faqs = document.querySelectorAll(".faq-box");
-faqs.forEach(faq => {
-  faq.addEventListener("click", () => {
-    faq.classList.toggle("active");
+// =========================
+// FAQ
+// =========================
+const faqQuestions = document.querySelectorAll(".faq-question");
+faqQuestions.forEach(question => {
+  question.addEventListener("click", () => {
+    const faqBox = question.closest(".faq-box");
+    faqBox.classList.toggle("active");
   });
 });
+
+// =========================
+// MOBILE MENU
+// =========================
+
+function toggleMenu() {
+  const menu = document.querySelector(".nav-menu");
+  if (!menu) return;
+  menu.classList.toggle("active");
+}
 
 function toggleMenu() {
   const menu = document.querySelector(".menu");

@@ -600,3 +600,211 @@ body.dark .checkout-btn{
     text-align:center;
   }
 }
+
+/* =========================
+   NAVBAR IMPROVEMENT
+========================= */
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.menu-button {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  color: inherit;
+  cursor: pointer;
+}
+
+.nav-menu a {
+  transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+  color: #2563eb;
+}
+
+
+/* =========================
+   BUTTON IMPROVEMENT
+========================= */
+
+.buttons a {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}
+
+
+/* =========================
+   CART BUTTON
+========================= */
+
+.cart-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
+}
+
+.cart-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  background: #2563eb;
+  color: white;
+  border-radius: 15px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.cart-btn:hover {
+  background: #1e40af;
+  transform: translateY(-3px);
+}
+
+
+/* =========================
+   FAQ IMPROVEMENT
+========================= */
+
+.faq-question span {
+  font-size: 24px;
+  color: #2563eb;
+  transition: transform 0.3s ease;
+}
+
+.faq-box.active .faq-question span {
+  transform: rotate(45deg);
+}
+
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+  nav {
+    padding: 18px 5%;
+    position: sticky;
+  }
+
+  .logo h1 {
+    font-size: 30px;
+  }
+
+  .menu-button {
+    display: block;
+  }
+
+  nav ul.nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: white;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  }
+
+  body.dark nav ul.nav-menu {
+    background: #0d1830;
+  }
+
+  nav ul.nav-menu.active {
+    display: flex;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 70px 6%;
+    gap: 40px;
+  }
+
+  .hero-text h2 {
+    font-size: 50px;
+  }
+
+  .hero-card {
+    padding: 30px 15px;
+  }
+
+  .bracelet {
+    width: 220px;
+    height: 220px;
+  }
+
+  .title h2 {
+    font-size: 45px;
+  }
+
+}
+
+/* FLOATING SHOPPING CART */
+
+.floating-cart {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #243b64;
+    border-radius: 50%;
+
+    text-decoration: none;
+    z-index: 999;
+}
+
+/* ICON KERANJANG */
+
+.cart-icon {
+    font-size: 25px;
+    filter: grayscale(1) brightness(0) invert(1);
+}
+
+/* ANGKA NOTIFIKASI */
+
+#cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+
+    min-width: 20px;
+    height: 20px;
+    padding: 0 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ff3155;
+    color: white;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    border-radius: 50%;
+    box-sizing: border-box;
+}
